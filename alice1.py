@@ -54,7 +54,7 @@ def main():
     handle_dialog(request.json, response)
 
     logging.info(f'Response:  {response!r}')
-
+    print(response)
     # Преобразовываем в JSON и возвращаем
     return json.dumps(response)
 
