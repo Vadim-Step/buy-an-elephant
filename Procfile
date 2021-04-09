@@ -1,1 +1,1 @@
-web: python alice1.py
+web: python app.py
