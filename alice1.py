@@ -78,7 +78,7 @@ def handle_dialog(res, req):
                 but.append({'title': city.title(), 'hide': True})
             res['response']['buttons'] = [
                 *but,
-                {'title': 'Помощь', 'hide': False}
+                {'title': 'Помощь', 'hide': True}
             ]
     # если мы знакомы с пользователем и он нам что-то написал,
     # то это говорит о том, что он уже говорит о городе,
