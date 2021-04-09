@@ -95,6 +95,20 @@ def handle_dialog(res, req):
                 res['end_session'] = True
             elif 'Помощь' in req['request']['original_utterance']:
                 res['response']['text'] = 'Игра «Угадай город»'
+                res['response']['buttons'] = [
+                    {
+                        'title': 'Да',
+                        'hide': True
+                    },
+                    {
+                        'title': 'Нет',
+                        'hide': True
+                    },
+                    {
+                        'title': 'Помощь',
+                        'hide': True
+                    }
+                ]
             else:
                 res['response']['text'] = 'Не поняла ответа! Так да или нет?'
                 res['response']['buttons'] = [
