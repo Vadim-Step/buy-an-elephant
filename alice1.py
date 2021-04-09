@@ -93,7 +93,7 @@ def handle_dialog(res, req):
             elif 'нет' in req['request']['nlu']['tokens']:
                 res['response']['text'] = 'Ну и ладно!'
                 res['end_session'] = True
-            elif 'Помощь' in req['request']['nlu']['tokens']:
+            elif 'Помощь' in req['request']['original_utterance']:
                 res['response']['text'] = 'Игра «Угадай город»'
             else:
                 res['response']['text'] = 'Не поняла ответа! Так да или нет?'
