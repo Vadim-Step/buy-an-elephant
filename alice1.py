@@ -109,6 +109,21 @@ def handle_dialog(res, req):
                         'hide': True
                     }
                 ]
+            elif 'Покажи город на карте' in req['request']['original_utterance']:
+                res['response']['buttons'] = [
+                    {
+                        'title': 'Да',
+                        'hide': True
+                    },
+                    {
+                        'title': 'Нет',
+                        'hide': True
+                    },
+                    {
+                        'title': 'Помощь',
+                        'hide': True
+                    }
+                ]
             else:
                 res['response']['text'] = 'Не поняла ответа! Так да или нет?'
                 res['response']['buttons'] = [
