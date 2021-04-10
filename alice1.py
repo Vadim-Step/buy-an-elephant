@@ -110,6 +110,7 @@ def handle_dialog(res, req):
                     }
                 ]
             elif 'Покажи город на карте' in req['request']['original_utterance']:
+                res['response']['text'] = 'Вот он!'
                 res['response']['buttons'] = [
                     {
                         'title': 'Да',
