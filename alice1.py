@@ -171,7 +171,7 @@ def play_game(res, req):
                 },
                 {
                     'title': 'Покажи город на карте',
-                    "url": "https://market.yandex.ru/search?text=слон",
+                    "url": f"https://yandex.ru/maps/?mode=search&text={sessionStorage[user_id]['guessed_cities']}",
                     'hide': True
                 }
             ]
