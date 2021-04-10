@@ -125,6 +125,23 @@ def handle_dialog(res, req):
                         'hide': True
                     }
                 ]
+            elif get_country(req) and sessionStorage[user_id]['guessing_country']:
+                if get_country(req) == sessionStorage[user_id]['country']:
+                    res['response']['text'] = 'Именно! Продолжаем?'
+                    res['response']['buttons'] = [
+                        {
+                            'title': 'Да',
+                            'hide': True
+                        },
+                        {
+                            'title': 'Нет',
+                            'hide': True
+                        },
+                        {
+                            'title': 'Помощь',
+                            'hide': True
+                        }
+                    ]
             else:
                 res['response']['text'] = 'Не поняла ответа! Так да или нет?'
                 res['response']['buttons'] = [
@@ -167,13 +184,12 @@ def play_game(res, req):
     else:
         # сюда попадаем, если попытка отгадать не первая
         city = sessionStorage[user_id]['city']
-        # проверяем есть ли правильный ответ в сообщение
         if not sessionStorage[user_id]['guessing_country']:
             if get_city(req) == city:
                 # если да, то добавляем город к sessionStorage[user_id]['guessed_cities'] и
                 # отправляем пользователя на второй круг. Обратите внимание на этот шаг на схеме.
                 res['response']['text'] = 'Правильно! А в какой стране этот город?'
-                sessionStorage[user_id]['guessing_city'] = True
+                sessionStorage[user_id]['guessing_country'] = True
                 sessionStorage[user_id]['guessed_cities'].append(city)
                 sessionStorage[user_id]['game_started'] = False
                 res['response']['buttons'] = [
@@ -215,7 +231,7 @@ def play_game(res, req):
                     res['response']['card']['image_id'] = cities[city][attempt - 1]
                     res['response']['text'] = 'А вот и не угадал!'
         else:
-            sessionStorage[user_id]['guessing_city'] = False
+            sessionStorage[user_id]['guessing_country'] = False
             if get_country(req) == sessionStorage[user_id]['country']:
                 res['response']['text'] = 'Правильно! Сыграем ещё?'
                 sessionStorage[user_id]['guessed_cities'].append(city)
