@@ -48,7 +48,7 @@ def handle_dialog(res, req):
         if first_name is None:
             res['response']['text'] = 'Не расслышала имя. Повтори, пожалуйста!'
         else:
-            sessionStorage[user_id]['first_name'] = first_name
+            sessionStorage[user_id]['first_name'] = first_name.capitalized()
             sessionStorage[user_id]['guessed_cities'] = []
             res['response'][
                 'text'] = f'Приятно познакомиться, {first_name.title()}. Я Алиса. Отгадаешь город по фото?'
