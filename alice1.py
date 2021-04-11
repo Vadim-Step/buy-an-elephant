@@ -174,17 +174,17 @@ def play_game(res, req):
                 res['response']['text'] = 'Правильно! А в какой стране этот город?'
                 sessionStorage[user_id]['guessing_country'] = True
                 sessionStorage[user_id]['guessed_cities'].append(city)
-                res['response']['buttons'] = [
-                    {
-                        'title': 'Помощь',
-                        'hide': True
-                    },
-                    {
-                        'title': 'Покажи город на карте',
-                        "url": f"https://yandex.ru/maps/?mode=search&text={sessionStorage[user_id]['guessed_cities']}",
-                        'hide': True
-                    }
-                ]
+                #res['response']['buttons'] = [
+                #    {
+                #        'title': 'Помощь',
+                #        'hide': True
+                #    },
+                #    {
+                #        'title': 'Покажи город на карте',
+                #        "url": f"https://yandex.ru/maps/?mode=search&text={sessionStorage[user_id]['guessed_cities']}",
+                #        'hide': True
+                #    }
+                #]
                 return
             else:
                 # если нет
@@ -205,7 +205,6 @@ def play_game(res, req):
                     res['response']['card']['image_id'] = cities[city][attempt - 1]
                     res['response']['text'] = 'А вот и не угадал!'
         else:
-            pass
             sessionStorage[user_id]['guessing_country'] = False
             if get_country(req) == sessionStorage[user_id]['country']:
                 res['response']['text'] = 'Правильно! Сыграем ещё?'
@@ -225,8 +224,7 @@ def play_game(res, req):
                     }
                 ]
             else:
-                res['response']['text'] = f'{get_country(req)} + {sessionStorage[user_id]["country"]}'
-                sessionStorage[user_id]['game_started'] = False
+                res['response']['text'] = f'Неправильно, это же {sessionStorage[user_id]["country"]}!'
         # увеличиваем номер попытки доля следующего шага
     sessionStorage[user_id]['attempt'] += 1
 
