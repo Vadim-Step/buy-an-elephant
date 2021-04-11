@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO)
 
 cities = {
     'москва': ['1540737/daa6e420d33102bf6947', '213044/7df73ae4cc715175059e', 'россия'],
-    'нью-йорк': ['1652229/728d5c86707054d4745f', '1030494/aca7ed7acefde2606bdc', 'америка'],
+    'нью-йорк': ['1652229/728d5c86707054d4745f', '1030494/aca7ed7acefde2606bdc', 'сша'],
     'париж': ["1652229/f77136c2364eb90a3ea8", '123494/aca7ed7acefd12e606bdc', 'франция']
 }
 
@@ -125,22 +125,6 @@ def handle_dialog(res, req):
                         'hide': True
                     }
                 ]
-            elif sessionStorage[user_id]['country']:
-                res['response']['text'] = 'Именно! Продолжаем?'
-                res['response']['buttons'] = [
-                    {
-                        'title': 'Да',
-                        'hide': True
-                    },
-                    {
-                        'title': 'Нет',
-                        'hide': True
-                    },
-                    {
-                        'title': 'Помощь',
-                        'hide': True
-                    }
-                ]
             else:
                 res['response']['text'] = 'Не поняла ответа! Так да или нет?'
                 res['response']['buttons'] = [
@@ -192,14 +176,6 @@ def play_game(res, req):
                 sessionStorage[user_id]['guessed_cities'].append(city)
                 sessionStorage[user_id]['game_started'] = False
                 res['response']['buttons'] = [
-                    {
-                        'title': 'Да',
-                        'hide': True
-                    },
-                    {
-                        'title': 'Нет',
-                        'hide': True
-                    },
                     {
                         'title': 'Помощь',
                         'hide': True
