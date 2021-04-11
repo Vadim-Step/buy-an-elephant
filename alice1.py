@@ -125,7 +125,7 @@ def handle_dialog(res, req):
                         'hide': True
                     }
                 ]
-            elif get_country(req) == sessionStorage[user_id]['country']:
+            elif sessionStorage[user_id]['country']:
                 res['response']['text'] = 'Именно! Продолжаем?'
                 res['response']['buttons'] = [
                     {
