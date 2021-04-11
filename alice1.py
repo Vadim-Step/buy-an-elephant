@@ -229,6 +229,9 @@ def play_game(res, req):
                         'hide': True
                     }
                 ]
+            else:
+                res['response']['text'] = get_country(req) + sessionStorage[user_id]['country']
+                sessionStorage[user_id]['game_started'] = False
         # увеличиваем номер попытки доля следующего шага
     sessionStorage[user_id]['attempt'] += 1
 
