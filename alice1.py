@@ -205,6 +205,7 @@ def play_game(res, req):
                     res['response']['card']['image_id'] = cities[city][attempt - 1]
                     res['response']['text'] = 'А вот и не угадал!'
         else:
+            pass
             sessionStorage[user_id]['guessing_country'] = False
             if get_country(req) == sessionStorage[user_id]['country']:
                 res['response']['text'] = 'Правильно! Сыграем ещё?'
@@ -230,7 +231,7 @@ def play_game(res, req):
                     }
                 ]
             else:
-                res['response']['text'] = get_country(req) + sessionStorage[user_id]['country']
+                res['response']['text'] = f'{get_country(req)} + {sessionStorage[user_id]["country"]}'
                 sessionStorage[user_id]['game_started'] = False
         # увеличиваем номер попытки доля следующего шага
     sessionStorage[user_id]['attempt'] += 1
