@@ -174,7 +174,6 @@ def play_game(res, req):
                 res['response']['text'] = 'Правильно! А в какой стране этот город?'
                 sessionStorage[user_id]['guessing_country'] = True
                 sessionStorage[user_id]['guessed_cities'].append(city)
-                sessionStorage[user_id]['game_started'] = False
                 res['response']['buttons'] = [
                     {
                         'title': 'Помощь',
