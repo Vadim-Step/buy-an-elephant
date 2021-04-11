@@ -174,25 +174,10 @@ def play_game(res, req):
                 res['response']['text'] = 'Правильно! А в какой стране этот город?'
                 sessionStorage[user_id]['guessing_country'] = True
                 sessionStorage[user_id]['guessed_cities'].append(city)
-                #res['response']['buttons'] = [
-                #    {
-                #        'title': 'Помощь',
-                #        'hide': True
-                #    },
-                #    {
-                #        'title': 'Покажи город на карте',
-                #        "url": f"https://yandex.ru/maps/?mode=search&text={sessionStorage[user_id]['guessed_cities']}",
-                #        'hide': True
-                #    }
-                #]
                 return
             else:
                 # если нет
                 if attempt == 3:
-                    # если попытка третья, то значит, что все картинки мы показали.
-                    # В этом случае говорим ответ пользователю,
-                    # добавляем город к sessionStorage[user_id]['guessed_cities'] и отправляем его на второй круг.
-                    # Обратите внимание на этот шаг на схеме.
                     res['response']['text'] = f'Вы пытались. Это {city.title()}. Сыграем ещё?'
                     sessionStorage[user_id]['game_started'] = False
                     sessionStorage[user_id]['guessed_cities'].append(city)
@@ -225,6 +210,21 @@ def play_game(res, req):
                 ]
             else:
                 res['response']['text'] = f'Неправильно, это же {sessionStorage[user_id]["country"]}!'
+                sessionStorage[user_id]['game_started'] = False
+                res['response']['buttons'] = [
+                    {
+                        'title': 'Да',
+                        'hide': True
+                    },
+                    {
+                        'title': 'Нет',
+                        'hide': True
+                    },
+                    {
+                        'title': 'Помощь',
+                        'hide': True
+                    }
+                ]
         # увеличиваем номер попытки доля следующего шага
     sessionStorage[user_id]['attempt'] += 1
 
