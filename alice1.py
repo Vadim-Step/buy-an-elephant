@@ -156,7 +156,7 @@ def play_game(res, req):
             city = random.choice(list(cities))
         # записываем город в информацию о пользователе
         sessionStorage[user_id]['city'] = city
-        sessionStorage[user_id]['country'] = cities[city]
+        sessionStorage[user_id]['country'] = cities[city][-1]
         sessionStorage[user_id]['guessing_country'] = False
         # добавляем в ответ картинку
         res['response']['card'] = {}
