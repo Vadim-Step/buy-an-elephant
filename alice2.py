@@ -48,7 +48,7 @@ def handle_dialog(req, res):
         'original_utterance'].lower() or 'хорошо' in req['request']['original_utterance'].lower():
         print(sessionStorage)
         animal = sessionStorage[user_id]['animal']
-        if 'g' == 'Кролик':
+        if sessionStorage[user_id]['animal'] == 'Кролик':
             print(user_id)
             res['response']['text'] = f'Кролика можно найти на Яндекс.Маркете.'
             res['response']['end_session'] = True
