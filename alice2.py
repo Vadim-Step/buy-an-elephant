@@ -37,17 +37,16 @@ def handle_dialog(req, res):
                 "Отстань!",
             ]
         }
+
         sessionStorage[user_id]['animal'] = 'Слон'
         animal = sessionStorage[user_id]['animal']
         res['response']['text'] = f'Привет! Купи {animal}а!'
         res['response']['buttons'] = get_suggests(user_id)
-
         return
     if 'ладно' in req['request']['original_utterance'].lower() or 'куплю' in req['request'][
         'original_utterance'].lower() or 'покупаю' in req['request'][
         'original_utterance'].lower() or 'хорошо' in req['request']['original_utterance'].lower():
         animal = sessionStorage[user_id]['animal']
-        # Пользователь согласился, прощаемся.
         if sessionStorage[user_id]['animal'] == 'Кролик':
             res['response']['text'] = f'Кролика можно найти на Яндекс.Маркете.'
             res['response']['end_session'] = True
@@ -61,6 +60,7 @@ def handle_dialog(req, res):
                     "Отстань!",
                 ]
             }
+            res['response']['buttons'] = get_suggests(user_id)
         return
     animal = sessionStorage[user_id]['animal']
     res['response']['text'] = \
