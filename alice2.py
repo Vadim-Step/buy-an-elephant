@@ -30,7 +30,7 @@ def main():
 def handle_dialog(req, res):
     user_id = req['session']['user_id']
     if req['session']['new']:
-        sessionStorage[user_id]['sug'] = {
+        sessionStorage[user_id] = {
             'suggests': [
                 "Не хочу.",
                 "Не буду.",
@@ -61,7 +61,7 @@ def handle_dialog(req, res):
 
 
 def get_suggests(user_id):
-    session = sessionStorage[user_id]['sug']
+    session = sessionStorage[user_id]
 
     suggests = [
         {'title': suggest, 'hide': True}
@@ -69,7 +69,7 @@ def get_suggests(user_id):
     ]
 
     session['suggests'] = session['suggests'][1:]
-    sessionStorage[user_id]['sug'] = session
+    sessionStorage[user_id] = session
     animal = sessionStorage[user_id]['animal']
     if len(suggests) < 2:
         suggests.append({
