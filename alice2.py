@@ -48,11 +48,19 @@ def handle_dialog(req, res):
         'original_utterance'].lower() or 'хорошо' in req['request']['original_utterance'].lower():
         animal = sessionStorage[user_id]['animal']
         # Пользователь согласился, прощаемся.
-        res['response']['text'] = f'Слона можно найти на Яндекс.Маркете!'
         if sessionStorage[user_id]['animal'] == 'Кролик':
+            res['response']['text'] = f'Кролика можно найти на Яндекс.Маркете.'
             res['response']['end_session'] = True
         else:
+            res['response']['text'] = f'Слона можно найти на Яндекс.Маркете. А теперь купи кролика!'
             sessionStorage[user_id]['animal'] = 'Кролик'
+            sessionStorage[user_id] = {
+                'suggests': [
+                    "Не хочу.",
+                    "Не буду.",
+                    "Отстань!",
+                ]
+            }
         return
     animal = sessionStorage[user_id]['animal']
     res['response']['text'] = \
