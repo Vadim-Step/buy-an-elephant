@@ -29,16 +29,16 @@ def main():
 
 def handle_dialog(req, res):
     user_id = req['session']['user_id']
+    print(sessionStorage)
     if req['session']['new']:
         sessionStorage[user_id] = {
             'suggests': [
                 "Не хочу.",
                 "Не буду.",
                 "Отстань!",
-            ]
+            ],
+            'animal': 'слон'
         }
-
-        sessionStorage[user_id]['animal'] = 'Слон'
         animal = sessionStorage[user_id]['animal']
         res['response']['text'] = f'Привет! Купи {animal}а!'
         res['response']['buttons'] = get_suggests(user_id)
@@ -46,8 +46,10 @@ def handle_dialog(req, res):
     if 'ладно' in req['request']['original_utterance'].lower() or 'куплю' in req['request'][
         'original_utterance'].lower() or 'покупаю' in req['request'][
         'original_utterance'].lower() or 'хорошо' in req['request']['original_utterance'].lower():
+        print(sessionStorage)
         animal = sessionStorage[user_id]['animal']
-        if sessionStorage[user_id]['animal'] == 'Кролик':
+        if 'g' == 'Кролик':
+            print(user_id)
             res['response']['text'] = f'Кролика можно найти на Яндекс.Маркете.'
             res['response']['end_session'] = True
         else:
@@ -58,10 +60,12 @@ def handle_dialog(req, res):
                     "Не хочу.",
                     "Не буду.",
                     "Отстань!",
-                ]
+                ],
+                'animal': 'кролик'
             }
             res['response']['buttons'] = get_suggests(user_id)
         return
+    print(user_id)
     animal = sessionStorage[user_id]['animal']
     res['response']['text'] = \
         f"Все говорят '{req['request']['original_utterance']}', а ты купи {animal}а!"
@@ -70,7 +74,7 @@ def handle_dialog(req, res):
 
 def get_suggests(user_id):
     session = sessionStorage[user_id]
-
+    print(sessionStorage)
     suggests = [
         {'title': suggest, 'hide': True}
         for suggest in session['suggests'][:2]
